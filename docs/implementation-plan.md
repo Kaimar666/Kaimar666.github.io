@@ -73,7 +73,7 @@
 - **Cloudflare Workers Static Assets：** 采用 Git 构建或上传静态输出，适合把源码仓库与公开网站分开。Cloudflare 目前推荐新项目使用 Workers；纯静态资源存储没有额外费用，静态资源请求免费且不限次数，文件与构建有具体限额。[当前产品建议](https://developers.cloudflare.com/pages/)、[静态资源计费](https://developers.cloudflare.com/workers/static-assets/billing-and-limitations/)。
 - **独立域名：** 可后续绑定；域名不与 GitHub 用户名绑定。尚未核实可注册性，也未发生购买。
 
-只读核实到当前连接账号为 **Kaimar666**，已经存在公开仓库 [Kaimar666/Kaimar666.github.io](https://github.com/Kaimar666/Kaimar666.github.io)，默认分支为 `master`。该个人站对应地址为 `https://kaimar666.github.io/`；不需要新注册一个名为 Kaimar 的账号。当前没有创建远程仓库、提交变更或部署。
+当前连接账号为 **Kaimar666**，使用现有公开仓库 [Kaimar666/Kaimar666.github.io](https://github.com/Kaimar666/Kaimar666.github.io)，默认分支为 `master`。该个人站对应地址为 `https://kaimar666.github.io/`；不需要新注册一个名为 Kaimar 的账号。开发分支已上传并创建 [草稿 PR #1](https://github.com/Kaimar666/Kaimar666.github.io/pull/1)，没有合并或切换线上站点。
 
 #### 既有博客衔接建议
 

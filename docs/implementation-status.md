@@ -8,6 +8,8 @@
 
 远程默认分支、GitHub Pages 设置与线上页面尚未修改。GitHub Pages 的构建发布工作流已在本地准备，正式接入步骤见 README。
 
+开发分支已上传到现有公开仓库，并建立 [草稿 PR #1](https://github.com/Kaimar666/Kaimar666.github.io/pull/1) 供审阅。草稿 PR 不合并到生产分支，线上旧站仍未切换。下表记录本地验证；远程 Actions 状态以 PR 检查区为准。
+
 ## 已完成
 
 - Kaimar 的真实名称、身份与原句简介；深色介绍区、浅色内容区，配置化头像与关注方向。
