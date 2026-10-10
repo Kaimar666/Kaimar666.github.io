@@ -1,0 +1,16 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import NoteList from '../../components/NoteList.astro';
+import { getNotes, usedTopics, href, seriesDefinitions } from '../../lib/content';
+const notes = await getNotes();
+const topics = usedTopics(notes);
+const series = seriesDefinitions.filter((definition) => definition.visible !== false && notes.some((entry) => entry.data.series === definition.id));
+---
+<BaseLayout title="记录" description="Kaimar 的生活、想法与工程实践，长文和短记都在这里。">
+  <main id="main" class="wrap page-content">
+    <header class="page-heading"><p class="eyebrow">NOTES & STORIES</p><h1>记录</h1><p>生活、想法，以及把它们做出来的过程。<br />长文和短记，都在这里。</p></header>
+    {topics.length > 0 && <nav class="topic-links" aria-label="记录主题">{topics.map((topic) => <a href={href(`/topics/${encodeURIComponent(topic.id)}/`)}>{topic.label}<span>{topic.count}</span></a>)}</nav>}
+    {series.length > 0 && <section class="series-index"><h2>专栏</h2><div class="series-links">{series.map((definition) => <a href={href(`/series/${encodeURIComponent(definition.id)}/`)}>{definition.label} <span aria-hidden="true">↗</span></a>)}</div></section>}
+    {notes.length > 0 ? <NoteList notes={notes} /> : <div class="empty-state"><h2>还没有公开的记录。</h2><p>有些想法需要一点时间，慢慢整理。</p><a class="text-link" href={href('/about/')}>关于 Kaimar <span aria-hidden="true">↗</span></a></div>}
+  </main>
+</BaseLayout>

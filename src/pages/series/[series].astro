@@ -1,0 +1,13 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import NoteList from '../../components/NoteList.astro';
+import { getNotes, seriesDefinitions, href } from '../../lib/content';
+export async function getStaticPaths() {
+  const notes = await getNotes();
+  return seriesDefinitions.filter((definition) => definition.visible !== false && notes.some((entry) => entry.data.series === definition.id)).map((definition) => ({ params: { series: definition.id }, props: { definition, notes: notes.filter((entry) => entry.data.series === definition.id).sort((a, b) => (a.data.seriesOrder ?? 999) - (b.data.seriesOrder ?? 999) || a.data.date.valueOf() - b.data.date.valueOf()) } }));
+}
+const { definition, notes } = Astro.props;
+---
+<BaseLayout title={definition.label} description={definition.description}>
+  <main id="main" class="wrap page-content"><a class="back-link" href={href('/notes/')}><span aria-hidden="true">←</span> 全部记录</a><header class="page-heading"><p class="eyebrow">SERIES</p><h1>{definition.label}</h1>{definition.description && <p>{definition.description}</p>}</header><NoteList notes={notes} /></main>
+</BaseLayout>

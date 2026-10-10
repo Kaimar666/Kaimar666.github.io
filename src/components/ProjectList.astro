@@ -1,0 +1,11 @@
+---
+import { projectHref, href, type Project } from '../lib/content';
+interface Props { projects: Project[]; }
+const { projects } = Astro.props;
+---
+<div class="project-list">
+  {projects.map((entry) => <article class="project-row">
+    {entry.data.cover && <a class="project-cover" href={projectHref(entry)} tabindex="-1" aria-hidden="true"><img src={href(entry.data.cover)} alt="" loading="lazy" width="130" height="100" /></a>}
+    <div><p class="project-status">{entry.data.status}{entry.data.draft && <span class="draft-label"> · 草稿</span>}</p><h3><a href={projectHref(entry)}>{entry.data.title} <span aria-hidden="true">↗</span></a></h3>{entry.data.summary && <p class="project-summary">{entry.data.summary}</p>}</div>
+  </article>)}
+</div>

@@ -1,0 +1,17 @@
+---
+import { site, href } from '../lib/content';
+---
+<section class="intro-band" aria-labelledby="intro-name">
+  <div class:list={['wrap', 'intro-grid', { 'without-focus': !site.focus.enabled }]}>
+    <div class="identity">
+      {site.avatar ? <img class="avatar" src={href(site.avatar)} alt={site.name} width="80" height="80" /> : <span class="avatar monogram" aria-hidden="true">{site.avatarText}</span>}
+      <div class="identity-copy">
+        <p class="role-line">{site.roles.join(' · ')}</p>
+        <h1 id="intro-name">{site.name}</h1>
+        <p class="identity-description">{site.description}</p>
+        <div class="intro-actions"><a href={href('/about/')}>关于我 <span aria-hidden="true">↗</span></a><a href={href('/notes/')}>看看记录 <span aria-hidden="true">↗</span></a></div>
+      </div>
+    </div>
+    {site.focus.enabled && <aside class="focus"><p class="focus-label">{site.focus.title}</p><ul>{site.focus.items.map((item) => <li>{item}</li>)}</ul></aside>}
+  </div>
+</section>

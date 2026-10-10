@@ -1,0 +1,13 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import NoteList from '../../components/NoteList.astro';
+import { getNotes, usedTopics, href } from '../../lib/content';
+export async function getStaticPaths() {
+  const notes = await getNotes();
+  return usedTopics(notes).map((topic) => ({ params: { topic: topic.id }, props: { topic, notes: notes.filter((entry) => entry.data.tags.includes(topic.id)) } }));
+}
+const { topic, notes } = Astro.props;
+---
+<BaseLayout title={`${topic.label} · 记录`} description={topic.description}>
+  <main id="main" class="wrap page-content"><a class="back-link" href={href('/notes/')}><span aria-hidden="true">←</span> 全部记录</a><header class="page-heading"><p class="eyebrow">TOPIC</p><h1>{topic.label}</h1>{topic.description && <p>{topic.description}</p>}</header><NoteList notes={notes} /></main>
+</BaseLayout>

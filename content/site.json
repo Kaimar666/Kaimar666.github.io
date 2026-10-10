@@ -1,0 +1,27 @@
+{
+  "name": "Kaimar",
+  "title": "Kaimar · Agent 工程师与运动员",
+  "description": "一个在大厂工作的攻城狮，但是内心实际上是一个运动员，哈哈哈哈",
+  "roles": ["Agent 工程师", "运动员"],
+  "avatar": "",
+  "avatarText": "K.",
+  "navigation": [
+    { "label": "首页", "href": "/", "visible": true },
+    { "label": "记录", "href": "/notes/", "visible": true },
+    { "label": "项目", "href": "/projects/", "visible": true },
+    { "label": "关于", "href": "/about/", "visible": true }
+  ],
+  "focus": {
+    "enabled": true,
+    "title": "这里关注",
+    "items": ["Agent 工程实践", "运动与日常生活", "想法与项目"]
+  },
+  "homepage": { "showProjects": true, "showNotes": true, "projectLimit": 3, "noteLimit": 4 },
+  "links": [],
+  "theme": {
+    "intro": "#1b1e31",
+    "background": "#fafaf8",
+    "accent": "#e7b28b",
+    "accentText": "#8a4f2c"
+  }
+}
