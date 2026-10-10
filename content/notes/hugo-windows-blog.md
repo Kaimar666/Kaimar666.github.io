@@ -126,7 +126,7 @@ legacyPath: /post/blog/
 
 ![push](/images/legacy/blog/21.png)
 
-–使用https://Kaimar666.github.io访问博客
+–使用 [https://Kaimar666.github.io](https://Kaimar666.github.io/) 访问博客
 
 ![myblog](/images/legacy/blog/22.png)
 
