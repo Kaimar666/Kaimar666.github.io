@@ -1,0 +1,6 @@
+[
+  { "id": "生活", "label": "生活", "description": "运动、日常，以及生活里的观察。", "visible": true },
+  { "id": "想法", "label": "想法", "description": "正在思考的问题，与逐渐清晰的判断。", "visible": true },
+  { "id": "技术", "label": "技术", "description": "工程实践与工具探索。", "visible": true },
+  { "id": "记录", "label": "记录", "description": "值得保存和回看的过程。", "visible": true }
+]

@@ -1,0 +1,9 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectList from '../../components/ProjectList.astro';
+import { getProjects, href } from '../../lib/content';
+const projects = await getProjects();
+---
+<BaseLayout title="项目" description="Kaimar 的作品、小实验和创作过程。">
+  <main id="main" class="wrap page-content"><header class="page-heading"><p class="eyebrow">PROJECTS & EXPERIMENTS</p><h1>项目</h1><p>把想法做成作品，再从实践里继续思考。</p></header>{projects.length ? <ProjectList projects={projects} /> : <div class="empty-state"><span class="empty-mark" aria-hidden="true">↗</span><h2>作品会慢慢放到这里。</h2><p>目前还没有公开的项目。你可以先逛逛我的记录。</p><a class="text-link" href={href('/notes/')}>看看记录 <span aria-hidden="true">↗</span></a></div>}</main>
+</BaseLayout>

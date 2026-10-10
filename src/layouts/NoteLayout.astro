@@ -1,0 +1,20 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import { render } from 'astro:content';
+import { href, formatDate, readingTime, topicInfo, type Note } from '../lib/content';
+interface Props { entry: Note; canonical?: string; }
+const { entry, canonical = `/notes/${Astro.props.entry.data.slug}/` } = Astro.props;
+const { Content, headings } = await render(entry);
+const toc = headings.filter((heading) => heading.depth === 2);
+---
+<BaseLayout title={entry.data.title} description={entry.data.summary} canonical={canonical} articleDate={entry.data.date} noindex={entry.data.draft}>
+  <main id="main" class="wrap article-page">
+    <a class="back-link" href={href('/notes/')}><span aria-hidden="true">←</span> 全部记录</a>
+    <header class="article-heading"><div class="entry-meta"><time datetime={entry.data.date.toISOString()}>{formatDate(entry.data.date)}</time><span>{entry.data.type === 'note' ? '短记' : '文章'}</span><span>{readingTime(entry.body)} 分钟阅读</span>{entry.data.draft && <span class="draft-label">草稿</span>}</div><h1>{entry.data.title}</h1>{entry.data.summary && <p>{entry.data.summary}</p>}<div class="entry-tags">{entry.data.tags.map((id) => <a href={href(`/topics/${encodeURIComponent(id)}/`)}>{topicInfo(id).label}</a>)}</div></header>
+    <div class:list={['reading-grid', { 'with-toc': toc.length > 2 }]}>
+      <article class="prose"><Content /></article>
+      {toc.length > 2 && <aside class="article-toc" aria-label="文章目录"><details open><summary>本文目录</summary><ol>{toc.map((heading) => <li class:list={{ nested: heading.depth === 3 }}><a href={`#${heading.slug}`}>{heading.text}</a></li>)}</ol></details></aside>}
+    </div>
+    <div class="article-end"><p>写下，留住，再慢慢想清楚。</p><a href={href('/notes/')}>继续读读其他记录 <span aria-hidden="true">↗</span></a></div>
+  </main>
+</BaseLayout>

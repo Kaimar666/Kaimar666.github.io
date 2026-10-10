@@ -1,0 +1,31 @@
+{
+  "name": "kaimar-personal-studio",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "astro dev --host 127.0.0.1",
+    "dev:drafts": "node scripts/preview-drafts.mjs",
+    "build": "node scripts/check-content.mjs && astro build",
+    "preview": "astro preview --host 127.0.0.1",
+    "check": "node scripts/check-content.mjs && astro check",
+    "verify": "node scripts/verify-build.mjs",
+    "test:content": "node scripts/test-content-flow.mjs",
+    "new": "node scripts/new-entry.mjs",
+    "publish": "node scripts/publish-entry.mjs"
+  },
+  "dependencies": {
+    "@astrojs/markdown-remark": "7.3.2",
+    "astro": "7.3.8",
+    "yaml": "2.9.1"
+  },
+  "devDependencies": {
+    "@astrojs/check": "0.9.10",
+    "@types/node": "^24.0.0",
+    "cheerio": "1.2.0",
+    "typescript": "6.0.3"
+  }
+}

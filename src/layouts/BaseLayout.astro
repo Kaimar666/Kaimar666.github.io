@@ -1,0 +1,62 @@
+---
+import '../styles/global.css';
+import { site, href, absolute, isLocalPreview } from '../lib/content';
+
+interface Props {
+  title?: string;
+  description?: string;
+  canonical?: string;
+  articleDate?: Date;
+  noindex?: boolean;
+}
+const { title, description: requestedDescription, canonical: requestedCanonical, articleDate, noindex = false } = Astro.props;
+const description = requestedDescription?.trim() || site.description;
+const pageTitle = title ? `${title} · ${site.name}` : site.title;
+const current = Astro.url.pathname.replace(import.meta.env.BASE_URL.replace(/\/$/, ''), '') || '/';
+const canonical = requestedCanonical ?? current;
+const active = (url: string) => url === '/' ? current === '/' : current.startsWith(url);
+const theme = `--intro:${site.theme.intro};--paper:${site.theme.background};--accent:${site.theme.accent};--accent-ink:${site.theme.accentText}`;
+const enabledLinks = site.links as { label: string; url: string; description?: string; visible?: boolean }[];
+---
+<!doctype html>
+<html lang="zh-CN" style={theme}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content={site.theme.intro} />
+    <meta name="description" content={description} />
+    <meta name="author" content={site.name} />
+    <title>{pageTitle}</title>
+    <link rel="icon" type="image/svg+xml" href={href('/favicon.svg')} />
+    <link rel="canonical" href={canonical.startsWith('https:') ? canonical : absolute(canonical)} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content={articleDate ? 'article' : 'website'} />
+    <meta property="og:url" content={canonical.startsWith('https:') ? canonical : absolute(canonical)} />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:locale" content="zh_CN" />
+    <meta name="twitter:card" content="summary" />
+    {articleDate && <meta property="article:published_time" content={articleDate.toISOString()} />}
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+  </head>
+  <body>
+    <a class="skip-link" href="#main">跳到正文</a>
+    <header class="site-header">
+      <div class="wrap header-inner">
+        <a class="wordmark" href={href('/')} aria-label={`${site.name} 首页`}>{site.name}<span>PERSONAL STUDIO</span></a>
+        <nav aria-label="主导航">
+          {site.navigation.filter((item) => item.visible).map((item) => <a href={href(item.href)} aria-current={active(item.href) ? 'page' : undefined}>{item.label}</a>)}
+        </nav>
+      </div>
+    </header>
+    <slot />
+    <footer class="site-footer wrap">
+      <span>{site.name}<span class="footer-separator">/</span>记录与创造</span>
+      <div class="footer-links">
+        {enabledLinks.filter((item) => item.visible !== false).map((item) => <a href={href(item.url)} target={item.url.startsWith('http') ? '_blank' : undefined} rel={item.url.startsWith('http') ? 'noopener noreferrer' : undefined}>{item.label} ↗</a>)}
+        <span>© {new Date().getFullYear()} {site.name}</span>
+      </div>
+    </footer>
+    {isLocalPreview && <div class="preview-indicator">本地预览</div>}
+  </body>
+</html>

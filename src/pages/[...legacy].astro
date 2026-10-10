@@ -1,0 +1,9 @@
+---
+import NoteLayout from '../layouts/NoteLayout.astro';
+import { getNotes } from '../lib/content';
+export async function getStaticPaths() {
+  return (await getNotes()).filter((entry) => entry.data.legacyPath).map((entry) => ({ params: { legacy: entry.data.legacyPath?.replace(/^\//, '').replace(/\/$/, '') }, props: { entry } }));
+}
+const { entry } = Astro.props;
+---
+<NoteLayout entry={entry} />
