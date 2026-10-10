@@ -1,7 +1,7 @@
 # Kaimar 个人网站：首期实施范围
 
-日期：2026-10-10（Asia/Shanghai）  
-状态：本地实现与验证已完成，详细结果见 [完成记录](implementation-status.md)；尚未切换线上站点。  
+日期：2026-10-10（Asia/Shanghai）
+状态：本地实现与验证已完成，详细结果见 [完成记录](implementation-status.md)；尚未切换线上站点。
 已确认设计和需求以 [设计确认记录](personal-website-design-brief.md) 为准。
 
 ## 1. 已定基准
