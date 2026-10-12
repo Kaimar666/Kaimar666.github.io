@@ -3,7 +3,7 @@ import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 
 const shared = {
-  id: z.string().uuid().optional(),
+  id: z.uuid().optional(),
   title: z.string().min(1),
   slug: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/),
   date: z.coerce.date(),
