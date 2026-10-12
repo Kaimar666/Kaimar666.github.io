@@ -3,6 +3,7 @@ import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 
 const shared = {
+  id: z.string().uuid().optional(),
   title: z.string().min(1),
   slug: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/),
   date: z.coerce.date(),
@@ -21,7 +22,7 @@ const notes = defineCollection({
   }),
   schema: z.object({
     ...shared,
-    type: z.enum(['article', 'note']).default('article'),
+    type: z.enum(['article', 'note', 'photo']).default('article'),
     series: z.string().optional(),
     seriesOrder: z.number().optional(),
     updated: z.coerce.date().optional(),

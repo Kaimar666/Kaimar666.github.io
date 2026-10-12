@@ -7,7 +7,7 @@ const hrefTopic = (id: string) => href(`/topics/${encodeURIComponent(id)}/`);
 <div class:list={['note-list', { compact }]}>
   {notes.map((entry) => <article class="note-row">
     <div class="note-row-copy"><h3><a href={noteHref(entry)}>{entry.data.title}</a></h3>{entry.data.summary && <p>{entry.data.summary}</p>}</div>
-    <div class="entry-meta"><time datetime={entry.data.date.toISOString()}>{formatDate(entry.data.date)}</time><span>{entry.data.type === 'note' ? '短记' : '文章'}</span>{entry.data.draft && <span class="draft-label">草稿</span>}</div>
+    <div class="entry-meta"><time datetime={entry.data.date.toISOString()}>{formatDate(entry.data.date)}</time><span>{entry.data.type === 'note' ? '短记' : entry.data.type === 'photo' ? '图文' : '文章'}</span>{entry.data.draft && <span class="draft-label">草稿</span>}</div>
     <div class="entry-tags">{entry.data.tags.map((tag) => <a href={hrefTopic(tag)}>{topicInfo(tag).label}</a>)}</div>
   </article>)}
 </div>
